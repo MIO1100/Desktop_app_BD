@@ -1,0 +1,31 @@
+import mysql.connector
+import adodbapi
+from mysql.connector import Error
+ 
+def connect():
+    """ Connect to MySQL database """
+    try:
+        conn = mysql.connector.connect(host='localhost',
+                                       database='telephon_bas',
+                                       user='root',
+                                       password='')
+
+
+
+        if conn.is_connected():
+            print('Connected to MySQL database')
+            cursor = conn.cursor()
+            sql = "SELECT * FROM telephon_bas.telephon"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            for item in result:
+                 print (item)
+            conn.close()
+ 
+    except Error as e:
+        print(e)
+ 
+    finally:
+        conn.close()
+if __name__ == '__main__':
+    connect()
